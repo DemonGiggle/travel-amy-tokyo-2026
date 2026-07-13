@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amy 東京 2026</title>
+  <meta name="description" content="Amy 東京 2026：8/15-8/19，桃園機場出發前往東京的旅程網站骨架。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f7f0e7;
+      --sand: #ead8c5;
+      --ink: #222020;
+      --wine: #7b2f39;
+      --rose: #cc7c6c;
+      --gold: #b9914b;
+      --sky: #dce8f1;
+      --panel: rgba(255, 252, 248, 0.78);
+      --line: rgba(34, 32, 32, 0.1);
+      --shadow: 0 24px 70px rgba(70, 44, 35, 0.13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", "Noto Serif TC", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(220, 232, 241, 0.95), transparent 30rem),
+        radial-gradient(circle at 85% 15%, rgba(204, 124, 108, 0.22), transparent 18rem),
+        linear-gradient(135deg, #f8f1e8 0%, #f5ede2 46%, #efe5d7 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: linear-gradient(rgba(123, 47, 57, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 47, 57, 0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black, transparent 92%);
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 24px auto 40px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(123, 47, 57, 0.9), rgba(66, 29, 49, 0.92)),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 60%);
+      box-shadow: var(--shadow);
+      color: #fff8f2;
+      padding: 28px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -48px;
+      top: -56px;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 210, 160, 0.36), transparent 68%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .eyebrow span {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd59f, #ff986f);
+      box-shadow: 0 0 18px rgba(255, 213, 159, 0.55);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-family: "DM Serif Display", "Noto Serif TC", serif;
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+    }
+
+    .lede {
+      max-width: 36rem;
+      font-size: 18px;
+      line-height: 1.85;
+      color: rgba(255, 248, 242, 0.82);
+    }
+
+    .chips, .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip, .stat, .card, .note {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 248, 242, 0.84);
+    }
+
+    .stats { margin-top: 24px; }
+
+    .stat {
+      min-width: 150px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .stat-label {
+      color: rgba(255, 248, 242, 0.62);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .poster {
+      min-height: 100%;
+      border-radius: 30px;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 40%),
+        linear-gradient(160deg, rgba(242, 184, 132, 0.26), rgba(47, 25, 38, 0.4));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .route {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(25, 16, 22, 0.28);
+    }
+
+    .route h2, .section h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .route ol {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.9;
+      color: rgba(255, 248, 242, 0.86);
+    }
+
+    .note {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 248, 242, 0.84);
+      line-height: 1.8;
+    }
+
+    .section {
+      margin-top: 18px;
+      border-radius: 30px;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-header p, .placeholder p, .footer-note {
+      margin: 0;
+      line-height: 1.8;
+      color: rgba(34, 32, 32, 0.68);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 18px;
+      border-color: var(--line);
+    }
+
+    .card strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .placeholder {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .placeholder article {
+      padding: 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(234, 216, 197, 0.44), rgba(255, 255, 255, 0.65));
+      border: 1px dashed rgba(123, 47, 57, 0.18);
+    }
+
+    .placeholder h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    footer {
+      margin: 18px 0 0;
+      padding: 0 4px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .cards,
+      .placeholder {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding: 22px;
+        border-radius: 28px;
+      }
+
+      .shell {
+        width: min(100% - 20px, 1120px);
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span></span>Travel shell in progress</div>
+      <div class="hero-grid">
+        <div>
+          <div class="chips">
+            <div class="chip">Tokyo 2026</div>
+            <div class="chip">8/15-8/19</div>
+            <div class="chip">TPE → Tokyo</div>
+          </div>
+          <h1>Amy Tokyo<br>2026</h1>
+          <p class="lede">
+            先把旅程的殼搭起來。這頁會慢慢長成一份真正能出發前反覆打開的東京行程網站，不是那種看一次就忘的文件墳場。
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-label">Duration</div>
+              <div class="stat-value">5 Days</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Window</div>
+              <div class="stat-value">8/15-8/19</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Route</div>
+              <div class="stat-value">TPE to Tokyo</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="poster">
+          <section class="route">
+            <h2>Trip Spine</h2>
+            <ol>
+              <li>桃園機場出發</li>
+              <li>抵達東京，進市區安頓</li>
+              <li>中間三天安排主行程與彈性段</li>
+              <li>8/19 收尾回程</li>
+            </ol>
+          </section>
+          <section class="note">
+            目前先鎖定旅程名稱、時間與大方向。之後補上機票、住宿、每日分段、地圖、餐廳與預算，頁面就會開始有靈魂。
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>目前已知</h2>
+          <p>把現在明確的資訊先釘住，後面就不會從空白頁重新開始。</p>
+        </div>
+        <p>GitHub Pages ready</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <strong>旅程時間</strong>
+          <p>2026/08/15 - 2026/08/19</p>
+        </article>
+        <article class="card">
+          <strong>出發地</strong>
+          <p>桃園機場 TPE</p>
+        </article>
+        <article class="card">
+          <strong>目的地</strong>
+          <p>東京 Tokyo</p>
+        </article>
+      </div>
+
+      <div class="placeholder">
+        <article>
+          <h3>待補：每日行程</h3>
+          <p>Day 1 到 Day 5 的節奏、主要區域、交通段與保留彈性。</p>
+        </article>
+        <article>
+          <h3>待補：住宿與移動</h3>
+          <p>飯店、機場往返、Suica 或其他票券策略，都先留位置。</p>
+        </article>
+        <article>
+          <h3>待補：地圖與清單</h3>
+          <p>景點地圖、餐廳備選、購物點、雨天備案，之後往這裡塞。</p>
+        </article>
+        <article>
+          <h3>待補：預算與行前事項</h3>
+          <p>機票、住宿、交通、餐飲、網卡與待辦，後面做成可快速掃描的區塊。</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-note">Repo shell created for GitHub Pages. Content can grow without換骨重練。</p>
+    </footer>
+  </main>
+</body>
+</html>
