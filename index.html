@@ -267,6 +267,38 @@
       font-size: 18px;
     }
 
+    .itinerary {
+      display: grid;
+      gap: 12px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(90deg, rgba(123, 47, 57, 0.08), rgba(255, 255, 255, 0.7));
+      border: 1px solid var(--line);
+    }
+
+    .day-label {
+      color: var(--wine);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .day h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .day p {
+      margin: 0;
+      line-height: 1.8;
+    }
+
     footer {
       margin: 18px 0 0;
       padding: 0 4px;
@@ -277,6 +309,11 @@
       .cards,
       .placeholder {
         grid-template-columns: 1fr;
+      }
+
+      .day {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
 
       .section-header {
@@ -331,14 +368,14 @@
           <section class="route">
             <h2>Trip Spine</h2>
             <ol>
-              <li>桃園機場出發</li>
-              <li>抵達東京，進市區安頓</li>
-              <li>中間三天安排主行程與彈性段</li>
-              <li>8/19 收尾回程</li>
+              <li>成田機場 → 上野</li>
+              <li>東京市區、麻布台與浦安</li>
+              <li>東京迪士尼全天</li>
+              <li>8/19 成田機場回程</li>
             </ol>
           </section>
           <section class="note">
-            以 8/15-8/19 的東京行程為主軸，整理出出發資訊、旅程重點與後續細節區塊，讓整體安排一眼就能理解。
+            8/15-8/19 的東京夏日小旅行：前兩晚住上野、後兩晚住浦安，安排了影城、teamLab 與迪士尼。
           </section>
         </aside>
       </div>
@@ -386,7 +423,28 @@
       <div class="placeholder">
         <article>
           <h3>每日行程</h3>
-          <p>預計整理 Day 1 到 Day 5 的主要區域、節奏安排、交通段與彈性時間。</p>
+          <div class="itinerary">
+            <article class="day">
+              <div class="day-label">DAY 1</div>
+              <div><h3>抵達上野</h3><p>15:30 抵達成田 → Skyliner 到上野 → 飯店 Check in → 阿美橫町晚餐</p></div>
+            </article>
+            <article class="day">
+              <div class="day-label">DAY 2<br>上野住宿</div>
+              <div><h3>影城、麻布台與東京鐵塔</h3><p>哈利波特影城 → teamLab Borderless（麻布台）→ 東京鐵塔夜拍</p></div>
+            </article>
+            <article class="day">
+              <div class="day-label">DAY 3<br>搬到浦安</div>
+              <div><h3>上野、池袋到浦安</h3><p>上野國立博物館 → 妙壽神社 → 池袋吉伊卡哇專賣店 → 前往浦安飯店 Check in</p></div>
+            </article>
+            <article class="day">
+              <div class="day-label">DAY 4</div>
+              <div><h3>東京迪士尼</h3><p>全天暢玩東京迪士尼。</p></div>
+            </article>
+            <article class="day">
+              <div class="day-label">DAY 5</div>
+              <div><h3>回程</h3><p>浦安退房 → 前往成田機場 → 16:00 班機</p></div>
+            </article>
+          </div>
         </article>
         <article>
           <h3>住宿安排</h3>
