@@ -267,6 +267,30 @@
       font-size: 18px;
     }
 
+    .map-card {
+      grid-column: 1 / -1;
+      margin: 0;
+      overflow: hidden;
+      padding: 0 !important;
+      border: 1px dashed rgba(123, 47, 57, 0.18);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(234, 216, 197, 0.44), rgba(255, 255, 255, 0.65));
+    }
+
+    .map-card img {
+      display: block;
+      width: min(100%, 720px);
+      margin: 0 auto;
+      border-radius: 23px;
+    }
+
+    .map-card figcaption {
+      padding: 14px 20px 20px;
+      text-align: center;
+      color: rgba(34, 32, 32, 0.68);
+      line-height: 1.7;
+    }
+
     .itinerary {
       display: grid;
       gap: 12px;
@@ -451,10 +475,10 @@
           <p>8/15 - 8/16：Hop Inn Tokyo Ueno</p>
           <p>8/17 - 8/18：The Royal Park Hotel Maihama Resort Tokyo-Bay</p>
         </article>
-        <article>
-          <h3>地圖與清單</h3>
-          <p>預留景點地圖、餐廳備選、購物點與雨天備案等旅途中實用資訊。</p>
-        </article>
+        <figure class="map-card">
+          <img src="assets/tokyo-five-day-family-trip-map.jpg" alt="東京五日親子旅行地圖：2026 年 8 月 15 日至 19 日的每日路線與住宿安排">
+          <figcaption>東京五日親子旅行地圖</figcaption>
+        </figure>
         <article>
           <h3>行前準備</h3>
           <p>8/1 開始預訂 Skyliner 車票。</p>
